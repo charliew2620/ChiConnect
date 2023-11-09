@@ -15,8 +15,11 @@
         </script>
     </head>
     <body onload='loadMapScenario();'>
+        <form id="searchForm" method="post" action="/search">
+            <input type="text" name="searchQuery" placeholder="Search Location...">
+            <button type="submit">Search</button>
+        </form>
         <div id='printoutPanel'></div>
-        
         <div id='myMap' style='width: 100vw; height: 100vh;'></div>
     </body>
 </html>
