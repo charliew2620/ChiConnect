@@ -8,9 +8,27 @@
         <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key={{api_key}}'></script>
         <script type='text/javascript'>
                 var map;
+                var pushpin;
+                var navigationBarMode;
                 function loadMapScenario() {
-                    var navigationBarMode = Microsoft.Maps.NavigationBarMode;
+                    navigationBarMode = Microsoft.Maps.NavigationBarMode;
                     map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
+
+                    pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
+                    icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                    anchor: new Microsoft.Maps.Point(12, 39),
+                    text: 'A',
+                    textOffset: new Microsoft.Maps.Point(0, 5)
+                });
+                map.entities.push(pushpin);
+                // document.getElementById('printoutPanel').innerHTML =
+                //     '<b>Location:</b> <br>' + pushpin.getLocation() + '<br>';
+                // document.getElementById('printoutPanel').innerHTML =
+                //     '<b>Icon:</b> <br>' + pushpin.getIcon() + '<br>';
+                // document.getElementById('printoutPanel').innerHTML +=
+                //     '<b>Anchor:</b> <br>' + pushpin.getAnchor() + '<br>';
+                // document.getElementById('printoutPanel').innerHTML +=
+                //     '<b>Text:</b> <br>' + pushpin.getText() + '<br>';
                 }
                 
             
