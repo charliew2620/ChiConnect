@@ -30,13 +30,13 @@
                     zoom: 10
                 });
 
-                pushpin = new Microsoft.Maps.Pushpin(loc, {
-                    icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
-                    anchor: new Microsoft.Maps.Point(12, 39),
-                    text: 'You',
-                    textOffset: new Microsoft.Maps.Point(0, 5)
-                });
-                map.entities.push(pushpin);
+                // pushpin = new Microsoft.Maps.Pushpin(loc, {
+                //     icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                //     anchor: new Microsoft.Maps.Point(12, 39),
+                //     text: 'You',
+                //     textOffset: new Microsoft.Maps.Point(0, 5)
+                // });
+                // map.entities.push(pushpin);
             }, function (error) {
                 // If user denies location access or an error occurs, initialize the map with a default location
                 var defaultLoc = new Microsoft.Maps.Location(47.6062, -122.3321); // Example default location (Seattle)
@@ -61,24 +61,26 @@
 <body onload='loadMapScenario();'>
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app">
-        <!-- <form id="searchForm" method="post" action="/search">
-            <input type="text" name="searchQuery" placeholder="Search Location...">mura
-            <button type="submit">Search</button>
-        </form> -->
-        
         <div class="search-wrapper panel-heading col-sm-12">
             <input type="text" v-model="search" placeholder="Search" /> <br> <br>
+            <!-- <button type="button" @click="findPinOnMap(business)"> -->
+                <!-- Search
+            </button> -->
         </div>  
         <table class="table" id="myTable">
             <tbody>
                 <tr v-for="business in filteredBusinesses" :key="business.id">
                     <td>
-                        <button type="button" class="business-option-button" @click="findPinOnMap(business)">
-                            {{ business.name }}
-                        </button>
+                        <form method="post" action="/">
+                            <input type="hidden" name="searchQuery" :value="business.name">
+                            <button type="submit" class="business-option-button">
+                                {{ business.name }}
+                            </button>
+                            <button type="button" class="load-pin-button" @click="findPinOnMap(business)">
+                                📍
+                            </button>
+                        </form>
                     </td>
-                </tr>
-            
                 </tr>
             </tbody>
         </table>

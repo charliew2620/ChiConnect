@@ -3,6 +3,18 @@
         "id": 1, 
         "name": "Murali Dry Cleaners", 
         "lat": 41.8, 
+        "long": -87.7,
+        "reviews": [
+            {
+                "review_id": 1,
+                "description": "HI"
+            }
+        ]
+    },
+    {
+        "id": 1, 
+        "name": "Murali Laundromat", 
+        "lat": 41.8, 
         "long": -87.7
     },
     {

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for, redirect
 from config import API_KEY
 
 app = Flask(__name__)
@@ -11,9 +11,7 @@ app.jinja_env.variable_end_string = ']]'
 def search():
     query = request.args.get('query')
     print(f'user searched for: {query}')
-
-    # return jsonify(["Test", "Hello World"])
-    return render_template("search.html", api_key=API_KEY)
+    return render_template("search.html", api_key=API_KEY, query=query)
 
 # @app.route("/search/<input>", methods=['GET'])
 # def search
@@ -21,10 +19,13 @@ def search():
 @app.route("/", methods=['GET', 'POST'])
 def home_page():
     if request.method == 'POST':
-        search_query = request.form['searchQuery']
+        query = request.form.get('searchQuery', '')
         # Here you would typically process the search_query.
         # For now, we're just passing it back to the template.
-        return render_template("index.html", api_key=API_KEY, search_query=search_query)
+
+        return redirect(url_for('search', query=query))
+
+        # return render_template("index.html", api_key=API_KEY, search_query=search_query)
     return render_template("index.html", api_key=API_KEY)
 
 # @app.route(".")

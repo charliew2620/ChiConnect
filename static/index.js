@@ -30,7 +30,8 @@ createApp({
         return {
             businesses: [],
             search: "",
-            existingPins: {}
+            existingPins: {},
+            selectedBusinesses: null,
         };
       },
       computed: {
@@ -42,8 +43,27 @@ createApp({
           });
         }
     },
+
+    created() {
+        this.loadPins();
+      },
+
     methods: {
+        loadPins() {
+            const savedPins = localStorage.getItem('existingPins');
+            if (savedPins) {
+              this.existingPins = JSON.parse(savedPins);
+            //   this.existingPins.forEach(pin => this.findPinOnMap(pin));
+            }
+
+            
+          },
+        
+          savePins() {
+            localStorage.setItem('existingPins', JSON.stringify(this.existingPins));
+          },
         findPinOnMap(business) {
+            console.log(business)
             if (map && business) {
                 // Create a unique identifier for the business
                 const businessKey = business.name.toLowerCase()
@@ -80,7 +100,6 @@ createApp({
 
         console.log('mounted');
         this.map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-            // Insert your map configurations such as credentials
             credentials: 'Your_Bing_Maps_Key'
         });
 
