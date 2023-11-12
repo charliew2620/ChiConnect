@@ -12,7 +12,11 @@ def search():
     query = request.args.get('query')
     print(f'user searched for: {query}')
 
-    return jsonify(["Test", "Hello World"])
+    # return jsonify(["Test", "Hello World"])
+    return render_template("search.html", api_key=API_KEY)
+
+# @app.route("/search/<input>", methods=['GET'])
+# def search
 
 @app.route("/", methods=['GET', 'POST'])
 def home_page():

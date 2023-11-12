@@ -16,37 +16,98 @@
         var pushpin;
         var navigationBarMode;
         function loadMapScenario() {
-            navigationBarMode = Microsoft.Maps.NavigationBarMode;
-            map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
-                pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
-                icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
-                anchor: new Microsoft.Maps.Point(12, 39),
-                text: 'A',
-                textOffset: new Microsoft.Maps.Point(0, 5)
+        navigationBarMode = Microsoft.Maps.NavigationBarMode;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var loc = new Microsoft.Maps.Location(
+                    position.coords.latitude,
+                    position.coords.longitude
+                );
+
+                map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    center: loc,
+                    zoom: 10
+                });
+
+                pushpin = new Microsoft.Maps.Pushpin(loc, {
+                    icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                    anchor: new Microsoft.Maps.Point(12, 39),
+                    text: 'You',
+                    textOffset: new Microsoft.Maps.Point(0, 5)
+                });
+                map.entities.push(pushpin);
+            }, function (error) {
+                // If user denies location access or an error occurs, initialize the map with a default location
+                var defaultLoc = new Microsoft.Maps.Location(47.6062, -122.3321); // Example default location (Seattle)
+                map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    center: defaultLoc,
+                    zoom: 10
+                });
+                // Optionally add a pushpin at the default location
             });
-            map.entities.push(pushpin);
+        } else {
+            // Browser doesn't support Geolocation, initialize the map with a default location
+            var defaultLoc = new Microsoft.Maps.Location(47.6062, -122.3321); // Example default location (Seattle)
+            map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                center: defaultLoc,
+                zoom: 10
+            });
+            // Optionally add a pushpin at the default location
         }
-    </script>
+    }
+</script>
 </head>
 <body onload='loadMapScenario();'>
+    <script src="https://unpkg.com/vue@next"></script>
     <div id="app">
-        <form action="https://forms.gle/j56hbj8SsZWFvM388" method="get" target="_blank">
+        <!-- <form action="https://forms.gle/j56hbj8SsZWFvM388" method="get" target="_blank">
             <button type="submit">Add Business</button>
-        </form>
+        </form> -->
         
-        <p>{{ searchResults }}</p>
+        <!-- <p>{{ searchResults }}</p>
 
         <li v-for="(business, index) in businesses">
             {{ business.name }} ({{ business.lat }}, {{ business.long }})
-        </li>
+        </li> -->
 
-        <form id="searchForm" method="post" action="/search">
-            <input type="text" name="searchQuery" placeholder="Search Location...">
+        <!-- <form id="searchForm" method="post" action="/search">
+            <input type="text" name="searchQuery" placeholder="Search Location...">mura
             <button type="submit">Search</button>
-        </form>
+        </form> -->
+        
+        <div class="search-wrapper panel-heading col-sm-12">
+            <input type="text" v-model="search" placeholder="Search" /> <br> <br>
+        </div>  
+        <table class="table" id="myTable">
+            <!-- <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead> -->
+            <tbody>
+                <tr v-for="business in filteredBusinesses" :key="business.id">
+                    <!-- <td>{{ product.id }}</td> -->
+                    <td>
+                        <button type="button" class="business-option-button" @click="findPinOnMap(business)">
+                            {{ business.name }}
+                        </button>
+                    </td>
+                </tr>
+            
+                </tr>
+            </tbody>
+        </table>
+
         <div id='printoutPanel'></div>
 
         <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+        <div id='mapOverlay'>
+            <form action="https://forms.gle/j56hbj8SsZWFvM388" method="get" target="_blank">
+                <button type="submit" id="addBusinessButton">Add Business</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

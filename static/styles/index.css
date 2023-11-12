@@ -8,3 +8,50 @@ body{
 #searchForm {
     font-family: 'Courier New', Courier, monospace;
 }
+
+#mapOverlay {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    z-index: 10; /* Ensures the overlay is above the map */
+}
+
+#addBusinessButton {
+    padding: 10px 20px;
+    background-color: #0078d4; /* Bing Maps blue, for example */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.business-option-button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.business-option-button:hover {
+    background-color: #0056b3;
+}
+
+button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: left;
+}
+
+button:hover {
+    background-color: #e7e7e7;
+}
