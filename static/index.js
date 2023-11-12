@@ -1,6 +1,12 @@
 const { createApp, onMounted, ref } = Vue
 
-// const map = ref(null);
+async function getBusinesses() {
+    let businesses;
+    const res = await fetch('static/businesses.json')
+    businesses = await res.json()
+    return businesses
+}
+
 
 const searchResults = ref([]);
 
@@ -22,22 +28,14 @@ createApp({
     },
     data() {
         return {
-          businesses: [
-            {id: 1, name: "Murali Dry Cleaners", lat: 41, long: 87},
-            {id: 2, name: "Nanda Auto Repair Service", lat: 123.45, long: 56.78},
-            {id: 3, name: "Ho'", lat: 41, long: 87},
-            {id: 4, name: "Foobar",  lat: 41, long: 87}
-          ],
-          search: "",
+            businesses: [],
+            search: "",
+            existingPins: {}
         };
       },
       computed: {
         filteredBusinesses() {
             return this.businesses.filter(b => {
-            // return true if the product should be visible
-    
-            // in this example we just check if the search string
-            // is a substring of the product name (case insensitive)
             if (this.search.length != 0) {
                 return b.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1;
             }
@@ -47,20 +45,46 @@ createApp({
     methods: {
         findPinOnMap(business) {
             if (map && business) {
-                // Assuming `map` is your Bing Maps instance
-                const location = new Microsoft.Maps.Location(business.lat, business.long);
-                map.setView({ center: location, zoom: 15 });
-                // If you also want to update the pushpin location:
-                pushpin.setLocation(location);
+                // Create a unique identifier for the business
+                const businessKey = business.name.toLowerCase()
+    
+                // Check if a pushpin at this location already exists
+                if (!this.existingPins[businessKey]) {
+                    // If it doesn't exist, create a new location and pushpin
+                    const location = new Microsoft.Maps.Location(business.lat, business.long);
+                    const newPushpin = new Microsoft.Maps.Pushpin(location, {
+                        icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                        anchor: new Microsoft.Maps.Point(12, 39),
+
+                    });
+    
+                    // Add the new pushpin to the map
+                    map.entities.push(newPushpin);
+    
+                    // Add the pushpin to the existingPins object
+                    this.existingPins[businessKey] = newPushpin;
+                }
+    
+                // Whether it's a new pushpin or existing one, set the map view to center on it and zoom in
+                map.setView({ center: this.existingPins[businessKey].getLocation(), zoom: 25 });
             }
         },
     },
     mounted() {
+
+        getBusinesses().then(businessesData => {
+            this.businesses = businessesData;
+        }).catch(error => {
+            console.error('Failed to load businesses:', error);
+        }); 
+
         console.log('mounted');
         this.map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
             // Insert your map configurations such as credentials
             credentials: 'Your_Bing_Maps_Key'
         });
+
+        
 
         // Example call to search - you can implement your actual search logic here
         this.search('test');

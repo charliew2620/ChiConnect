@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1, 
+        "name": "Murali Dry Cleaners", 
+        "lat": 41.8, 
+        "long": -87.7
+    },
+    {
+        "id": 2, 
+        "name": "Nanda Auto Repair Service", 
+        "lat": 41.8710589, 
+        "long": -87.6782527
+    },
+    {
+        "id": 3, 
+        "name": "Ho's Hair Salon", 
+        "lat": 41.85, 
+        "long": -87.69
+    },
+    {
+        "id": 4, 
+        "name": "Foobar",  
+        "lat": 41.89, 
+        "long": -87.65
+    }
+  ]

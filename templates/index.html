@@ -61,16 +61,6 @@
 <body onload='loadMapScenario();'>
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app">
-        <!-- <form action="https://forms.gle/j56hbj8SsZWFvM388" method="get" target="_blank">
-            <button type="submit">Add Business</button>
-        </form> -->
-        
-        <!-- <p>{{ searchResults }}</p>
-
-        <li v-for="(business, index) in businesses">
-            {{ business.name }} ({{ business.lat }}, {{ business.long }})
-        </li> -->
-
         <!-- <form id="searchForm" method="post" action="/search">
             <input type="text" name="searchQuery" placeholder="Search Location...">mura
             <button type="submit">Search</button>
@@ -80,15 +70,8 @@
             <input type="text" v-model="search" placeholder="Search" /> <br> <br>
         </div>  
         <table class="table" id="myTable">
-            <!-- <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                </tr>
-            </thead> -->
             <tbody>
                 <tr v-for="business in filteredBusinesses" :key="business.id">
-                    <!-- <td>{{ product.id }}</td> -->
                     <td>
                         <button type="button" class="business-option-button" @click="findPinOnMap(business)">
                             {{ business.name }}
