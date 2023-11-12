@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>ChiConnect</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
-        <style type='text/css'>body{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',Helvetica,Arial,Sans-Serif}</style>
-        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key={{api_key}}'></script>
-        <script type='text/javascript'>
-                var map;
-                var pushpin;
-                var navigationBarMode;
-                function loadMapScenario() {
-                    navigationBarMode = Microsoft.Maps.NavigationBarMode;
-                    map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
+<head>
+    <title>ChiConnect</title>
+    
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <link rel="stylesheet" type="text/css" href="[[ url_for('static', filename='styles/index.css') ]]">
+    
+    <script type='text/javascript' src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=[[api_key]]'></script>
 
-                    pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
-                    icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
-                    anchor: new Microsoft.Maps.Point(12, 39),
-                    text: 'A',
-                    textOffset: new Microsoft.Maps.Point(0, 5)
-                });
-                map.entities.push(pushpin);
-                // document.getElementById('printoutPanel').innerHTML =
-                //     '<b>Location:</b> <br>' + pushpin.getLocation() + '<br>';
-                // document.getElementById('printoutPanel').innerHTML =
-                //     '<b>Icon:</b> <br>' + pushpin.getIcon() + '<br>';
-                // document.getElementById('printoutPanel').innerHTML +=
-                //     '<b>Anchor:</b> <br>' + pushpin.getAnchor() + '<br>';
-                // document.getElementById('printoutPanel').innerHTML +=
-                //     '<b>Text:</b> <br>' + pushpin.getText() + '<br>';
-                }
-                
-            
-        </script>
-    </head>
-    <body onload='loadMapScenario();'>
+    <script type='text/javascript' src="[[ url_for('static', filename='index.js') ]]" defer></script>
+
+    <script type='text/javascript'>
+        var map;
+        var pushpin;
+        var navigationBarMode;
+        function loadMapScenario() {
+            navigationBarMode = Microsoft.Maps.NavigationBarMode;
+            map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
+                pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
+                icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                anchor: new Microsoft.Maps.Point(12, 39),
+                text: 'A',
+                textOffset: new Microsoft.Maps.Point(0, 5)
+            });
+            map.entities.push(pushpin);
+        }
+    </script>
+</head>
+<body onload='loadMapScenario();'>
+    <div id="app">
+        
+        <p>{{ searchResults }}</p>
+
+        <li v-for="(business, index) in businesses">
+            {{ business.name }} ({{ business.lat }}, {{ business.long }})
+        </li>
+
         <form id="searchForm" method="post" action="/search">
             <input type="text" name="searchQuery" placeholder="Search Location...">
             <button type="submit">Search</button>
         </form>
         <div id='printoutPanel'></div>
+
         <div id='myMap' style='width: 100vw; height: 100vh;'></div>
-    </body>
+    </div>
+</body>
 </html>

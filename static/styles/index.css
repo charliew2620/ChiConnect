@@ -1,3 +1,10 @@
+body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    font-family:'Segoe UI',Helvetica,Arial,Sans-Serif
+}
+
 #searchForm {
     font-family: 'Courier New', Courier, monospace;
 }
