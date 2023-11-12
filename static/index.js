@@ -12,6 +12,8 @@ async function search(query, lat, long) {
     searchResults.value = await res.json();
 }
 
+
+
 // function loadMapScenario() {
 //     var map;
 //     var pushpin;
@@ -50,6 +52,12 @@ createApp({
                 name: 'Murali Dry Cleaners',
                 lat: 123.45,
                 long: 456.78
+            },
+            {
+                id: 1,
+                name: 'Nanda Auto Repair Service',
+                lat: 12.34,
+                long: 56.78
             }
         ])
 
