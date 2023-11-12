@@ -7,15 +7,11 @@ async function getBusinesses() {
     return businesses
 }
 
+// function getBusinessInfo() {
+    
+// }
 
 createApp({
-    setup() {
-        const message = ref('Hello vue!')
-
-        return {
-            message
-        }
-    },
     data() {
         return {
             businesses: [],

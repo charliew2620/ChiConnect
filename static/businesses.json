@@ -4,6 +4,7 @@
         "name": "Murali Dry Cleaners", 
         "lat": 41.8, 
         "long": -87.7,
+        "description": "AWESOME DRY CLEANING",
         "reviews": [
             {
                 "review_id": 1,
@@ -15,24 +16,28 @@
         "id": 1, 
         "name": "Murali Laundromat", 
         "lat": 41.8, 
-        "long": -87.7
+        "long": -87.7,
+        "description": "WOW AMAZING"
     },
     {
         "id": 2, 
         "name": "Nanda Auto Repair Service", 
         "lat": 41.8710589, 
-        "long": -87.6782527
+        "long": -87.6782527,
+        "description": ""
     },
     {
         "id": 3, 
         "name": "Ho's Hair Salon", 
         "lat": 41.85, 
-        "long": -87.69
+        "long": -87.69,
+        "description": ""
     },
     {
         "id": 4, 
         "name": "Foobar",  
         "lat": 41.89, 
-        "long": -87.65
+        "long": -87.65,
+        "description": ""
     }
   ]
