@@ -18,6 +18,7 @@ def search():
 
 @app.route("/", methods=['GET', 'POST'])
 def home_page():
+    print("home page reached")
     if request.method == 'POST':
         query = request.form.get('searchQuery', '')
         # Here you would typically process the search_query.

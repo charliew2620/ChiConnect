@@ -1,5 +1,7 @@
 # This file must be used with "source bin/activate" *from bash*
 # you cannot run it directly
+#!/bin/sh
+export FLASK_APP=main
 
 deactivate () {
     # reset old environment variables
