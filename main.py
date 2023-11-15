@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect
-from config import API_KEY
+import os
 
+API_KEY = os.environ.get('API_KEY')
 app = Flask(__name__)
 
 app.jinja_env.variable_start_string = '[['
