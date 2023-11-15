@@ -31,5 +31,9 @@ def home_page():
 
 # @app.route(".")
 
+@app.route("/health", methods=['GET'])
+def health():
+    return "<h1>Healthy</h1>"
+
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run()
