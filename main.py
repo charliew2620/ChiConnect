@@ -1,8 +1,16 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect
 import os
+from dotenv import load_dotenv
+from azure.cosmos import CosmosClient, PartitionKey, exceptions
+
+load_dotenv()
 
 API_KEY = os.environ.get('API_KEY')
+ENDPOINT = os.environ.get('COSMOS_ENDPOINT')
+KEY = os.environ["COSMOS_KEY"]
+
 app = Flask(__name__)
+db_client = CosmosClient(url=ENDPOINT, credential=KEY)
 
 app.jinja_env.variable_start_string = '[['
 app.jinja_env.variable_end_string = ']]'
