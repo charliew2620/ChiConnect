@@ -1,9 +1,6 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect
 import os
-from dotenv import load_dotenv
 from azure.cosmos import CosmosClient, PartitionKey, exceptions
-
-load_dotenv()
 
 API_KEY = os.environ.get('API_KEY')
 ENDPOINT = os.environ.get('COSMOS_ENDPOINT')
