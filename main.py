@@ -1,19 +1,12 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect
-import os, base64
+import os
 from azure.cosmos import CosmosClient, PartitionKey, exceptions
-
-# b64_string += "=" * ((4 - len(b64_string) % 4) % 4)
-# b = base64.b64encode(bytes('H1HQcGI0N0kqlNkWZ9JuLfOt82lFkpOLUGLWW6N5EFK5ILRfwAuNQ5iMVfDzwKYh7MKhCdgiNaKpACDbhMXm6A==', 'utf-8')) # bytes
-# base64_str = b.decode('utf-8') # convert bytes to string
-
 
 API_KEY = os.environ.get('API_KEY')
 ENDPOINT = os.environ.get('COSMOS_ENDPOINT')
 KEY = os.environ.get('COSMOS_KEY')
 if (KEY[-2:] != "=="):
     KEY += "=="
-
-print(KEY)
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 db_client = CosmosClient(url=ENDPOINT, credential=KEY)
