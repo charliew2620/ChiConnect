@@ -1,116 +1,65 @@
-const { createApp, onMounted, ref } = Vue
+const { createApp, ref, onMounted } = Vue;
 
-async function getBusinesses() {
-    let businesses;
-    const res = await fetch('static/businesses.json')
-    businesses = await res.json()
-    return businesses
-}
+const app = createApp({
+  setup() {
+    const mapInstance = ref(null);
+    // console.log(`https://www.bing.com/api/maps/mapcontrol?key=${[[api_key]]}&callback=initializeMap`)
 
+    onMounted(() => {
+      // Load Bing Maps API asynchronously
+      loadBingMapsAPI()
+    });
 
-const searchResults = ref([]);
+    const loadBingMapsAPI = () => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = `https://www.bing.com/api/maps/mapcontrol?callback=initializeMap`;
+        script.async = true;
+        script.defer = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    };
 
-async function search(query, lat, long) {
-    const res = await fetch('http://127.0.0.1:5000/search?' + new URLSearchParams({
-        query, lat, long
-    }));
-
-    searchResults.value = await res.json();
-}
-
-createApp({
-    setup() {
-        const message = ref('Hello vue!')
-
-        return {
-            message
-        }
-    },
-    data() {
-        return {
-            businesses: [],
-            search: "",
-            existingPins: {},
-            selectedBusinesses: null,
-        };
-      },
-      computed: {
-        filteredBusinesses() {
-            return this.businesses.filter(b => {
-            if (this.search.length != 0) {
-                return b.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1;
-            }
-          });
-        }
-    },
-
-    created() {
-        this.loadPins();
-      },
-
-    methods: {
-        loadPins() {
-            const savedPins = localStorage.getItem('existingPins');
-            if (savedPins) {
-              this.existingPins = JSON.parse(savedPins);
-            //   this.existingPins.forEach(pin => this.findPinOnMap(pin));
-            }
-
-            
+    window.initializeMap = () => {
+      const defaultLocation = new Microsoft.Maps.Location(41.8781, -87.6298);
+    
+      // Attempt to get the user's location using the Geolocation API
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            console.log('user location')
+            const userLocation = new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude);
+            initializeMapWithLocation(userLocation);
           },
-        
-          savePins() {
-            localStorage.setItem('existingPins', JSON.stringify(this.existingPins));
-          },
-        findPinOnMap(business) {
-            console.log(business)
-            if (map && business) {
-                // Create a unique identifier for the business
-                const businessKey = business.name.toLowerCase()
+          (error) => {
+            // If getting user location fails, use the default location
+            console.log('user location error', error)
+            initializeMapWithLocation(defaultLocation);
+          }
+        );
+      } else {
+        // Geolocation not supported, use the default location
+        console.log('geo location not supported')
+        initializeMapWithLocation(defaultLocation);
+      }
+    };
     
-                // Check if a pushpin at this location already exists
-                if (!this.existingPins[businessKey]) {
-                    // If it doesn't exist, create a new location and pushpin
-                    const location = new Microsoft.Maps.Location(business.lat, business.long);
-                    const newPushpin = new Microsoft.Maps.Pushpin(location, {
-                        icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
-                        anchor: new Microsoft.Maps.Point(12, 39),
-
-                    });
+    const initializeMapWithLocation = (location) => {
+      mapInstance.value = new Microsoft.Maps.Map('#myMap', {
+        credentials: api_key,
+        center: location,
+        zoom: 14,
+      });
+    };
     
-                    // Add the new pushpin to the map
-                    map.entities.push(newPushpin);
-    
-                    // Add the pushpin to the existingPins object
-                    this.existingPins[businessKey] = newPushpin;
-                }
-    
-                // Whether it's a new pushpin or existing one, set the map view to center on it and zoom in
-                map.setView({ center: this.existingPins[businessKey].getLocation(), zoom: 25 });
-            }
-        },
-    },
-    mounted() {
 
-        getBusinesses().then(businessesData => {
-            this.businesses = businessesData;
-        }).catch(error => {
-            console.error('Failed to load businesses:', error);
-        }); 
+    return {
+      mapInstance,
+    };
+  },
+});
 
-        console.log('mounted');
-        this.map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-            credentials: 'Your_Bing_Maps_Key'
-        });
-
-        
-
-        // Example call to search - you can implement your actual search logic here
-        this.search('test');
-
-        // console.log(this.$refs.mapEl)
-        // new Microsoft.Maps.Map(this.$refs.mapEl, {});
-        // loadMapScenario();
-    }
-    
-}).mount('#app')
+app.mount('#myMap');
