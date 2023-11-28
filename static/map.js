@@ -1,10 +1,10 @@
-const { createApp, ref, onMounted } = Vue;
 
-const app = createApp({
+app.component('Map', {
   template: `
-  <div>
-    <Map />
-  </div>
+    <div>
+      <SearchBar />
+      <div id="mapInner" style="position:relative; height:80vh; width:90vw;" ></div>
+    </div>
   `,
   setup() {
     const mapInstance = ref(null);
@@ -52,7 +52,7 @@ const app = createApp({
     };
     
     const initializeMapWithLocation = (location) => {
-      mapInstance.value = new Microsoft.Maps.Map('#myMap', {
+      mapInstance.value = new Microsoft.Maps.Map('#mapInner', {
         credentials: api_key,
         center: location,
         zoom: 14,
@@ -65,5 +65,4 @@ const app = createApp({
       mapInstance,
     };
   },
-});
-
+})
