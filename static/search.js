@@ -1,19 +1,15 @@
-// const { useFuse, UseFuseOptions } = Vue;
-
 app.component('SearchBar', {
   template: `
   <div class="form-outline" style="position:absolute; z-index: 1; top: 8%; left: 25%; width: 50%;" data-mdb-input-init>
     <input type="search" class="form-control" v-model="searchTerm" placeholder="Search" @input="performSearch">
     <ul>
-      <li v-for="result in searchResults" :key="result.id">{{ result.name }}</li>
+      <li v-for="result in searchResults" :key="result.item.id">{{ result.item.name }}</li>
     </ul>
   </div>
   `,
   setup() {
     const searchTerm = ref('');
     const searchResults = ref([]);
-
-    console.log("setup")
 
     const options = ref({
       keys: ['name'],
@@ -26,10 +22,12 @@ app.component('SearchBar', {
       { id: 3, name: 'Orange' },
     ]);
 
-    // const fuse = useFuse(data, options);
+    const fuse = new Fuse(data.value, options.value);
 
     const performSearch = () => {
-      // searchResults.value = fuse.search(searchTerm.value);
+      searchResults.value = fuse.search(searchTerm.value);
+      console.log("searchTerm", searchTerm.value)
+      console.log("searchResult", fuse.search(searchTerm.value))
     };
 
     onMounted(() => {
@@ -44,4 +42,4 @@ app.component('SearchBar', {
   },
 });
 
-app.mount('#app');
+app.mount('#app')
