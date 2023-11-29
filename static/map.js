@@ -2,7 +2,7 @@
 app.component('Map', {
   template: `
     <div>
-      <SearchBar />
+      <SearchBar :addPinAndZoom="addPinAndZoom" />
       <div id="mapInner" style="position:relative; height:80vh; width:90vw;" ></div>
     </div>
   `,
@@ -59,10 +59,24 @@ app.component('Map', {
         navigationBarMode: Microsoft.Maps.NavigationBarMode.minified,
       });
     };
+
+    const addPinAndZoom = (business) => {
+      if (!mapInstance.value) return;
+    
+      const location = new Microsoft.Maps.Location(business.lat, business.long);
+      const pin = new Microsoft.Maps.Pushpin(location,
+        {
+
+          title: business.name,
+        });
+      mapInstance.value.entities.push(pin);
+      mapInstance.value.setView({ center: location, zoom: 16 }); // Adjust zoom level as needed
+    };
     
 
     return {
       mapInstance,
+      addPinAndZoom,
     };
   },
 })

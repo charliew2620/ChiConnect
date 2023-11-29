@@ -15,14 +15,11 @@ app.jinja_env.variable_start_string = '[['
 app.jinja_env.variable_end_string = ']]'
 
 
-# @app.route("/search", methods=['GET'])
-# def search():
-#     query = request.args.get('query')
-#     print(f'user searched for: {query}')
-#     return render_template("search.html", api_key=API_KEY, query=query)
-
-# @app.route("/search/<input>", methods=['GET'])
-# def search
+@app.route("/add_business", methods=['POST'])
+def add_business():
+    # query = request.args.get('query')
+    # print(f'user searched for: {query}')
+    return render_template("add_business.html", api_key=API_KEY)
 
 @app.route("/", methods=['GET', 'POST'])
 def home_page():

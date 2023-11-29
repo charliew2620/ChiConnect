@@ -1,8 +1,12 @@
 const { createApp, ref, onMounted } = Vue;
-
 const app = createApp({
   template: `
   <div>
+      <div class="form-outline" style="position:absolute; z-index: 1; bottom: 12%; left: 80%; width: 20%;" data-mdb-input-init>  
+        <form action="/add_business" method="post">
+          <button type="submit">Add Business</button>
+        </form>    
+      </div>
     <Map />
   </div>
   `,
