@@ -5,8 +5,11 @@ app.component('SearchBar', {
     <input type="search" class="form-control" v-model="searchTerm" placeholder="Search for services..." @input="performSearch">
     <ul style="list-style:none">
       <li v-for="result in searchResults" :key="result.item.id">
+        <button type="submit" class="btn btn-primary" id="addBusinessButton" @click="sendToBusiness(result.item)">
+        {{ result.item.name }}
+        </button>
         <button type="submit" class="btn btn-primary" id="addBusinessButton" @click="handleClick(result.item)">
-          {{ result.item.name }}
+          📍
         </button>
       </li>
     </ul>
@@ -151,6 +154,10 @@ app.component('SearchBar', {
       console.log("searchResult", fuse.search(searchTerm.value))
     };
 
+    const sendToBusiness = (business) => {
+      window.location.href = `/business/${encodeURIComponent(JSON.stringify(business))}`;
+    }
+
     const handleClick = (business) => {
       console.log("Clicked on:", business.name);
       if (props.addPinAndZoom) {
@@ -167,6 +174,7 @@ app.component('SearchBar', {
       searchResults,
       performSearch,
       handleClick,
+      sendToBusiness,
     };
   },
 });
