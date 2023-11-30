@@ -63,5 +63,78 @@
             </div>
         </div>
     </div>
+
+    <!-- <div class="container my-4">
+        <div class="card">
+            <div class="card-header">
+                Leave a Review
+            </div>
+            <div class="card-body">
+                <form id="reviewForm">
+                    <div class="mb-3">
+                        <label class="form-label">Your Feedback</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="reviewOption" id="thumbsUp" value="thumbsUp">
+                            <label class="form-check-label" for="thumbsUp">
+                                Thumbs Up
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="reviewOption" id="thumbsDown" value="thumbsDown">
+                            <label class="form-check-label" for="thumbsDown">
+                                Thumbs Down
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="reviewOption" id="noFeedback" value="noFeedback" checked>
+                            <label class="form-check-label" for="noFeedback">
+                                No Feedback
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div> -->
+    <div class="container my-4">
+        <div class="card">
+            <div class="card-header">
+                Leave a Review
+            </div>
+            <div class="card-body">
+                <form id="reviewForm">
+                    <div class="mb-3">
+                        <label class="form-label">Your Feedback</label>
+                        <div>
+                            <button type="button" class="btn btn-outline-success me-2" id="thumbsUpButton">👍 Thumbs Up</button>
+                            <button type="button" class="btn btn-outline-danger" id="thumbsDownButton">👎 Thumbs Down</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('thumbsUpButton').addEventListener('click', function() {
+            this.classList.toggle('btn-success');
+            document.getElementById('thumbsDownButton').classList.remove('btn-danger');
+        });
+
+        document.getElementById('thumbsDownButton').addEventListener('click', function() {
+            this.classList.toggle('btn-danger');
+            document.getElementById('thumbsUpButton').classList.remove('btn-success');
+        });
+
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var review = document.getElementById('thumbsUpButton').classList.contains('btn-success') ? 'thumbsUp' :
+                         document.getElementById('thumbsDownButton').classList.contains('btn-danger') ? 'thumbsDown' : '';
+            console.log('Review submitted:', review);
+
+        });
+    </script>
 </body>
 </html>
