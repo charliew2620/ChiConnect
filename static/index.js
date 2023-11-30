@@ -2,14 +2,17 @@ const { createApp, ref, onMounted } = Vue;
 const app = createApp({
   template: `
   <div>
-      <div class="form-outline" style="position:absolute; z-index: 1; bottom: 12%; left: 80%; width: 20%;" data-mdb-input-init>  
+      <div style="position:absolute; z-index: 1; top: 6%; left: 39%; width: 20%;" data-mdb-input-init>  
         <form action="/add_business" method="post">
-          <button type="submit">Add Business</button>
+        <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Add Business">
+          <i class="bi bi-plus-circle"></i>
+        </button>
         </form>    
       </div>
     <Map />
   </div>
   `,
+          // <button type="button" class="btn btn-outline-success me-2" id="thumbsUpButton">👍</button>
   setup() {
     const mapInstance = ref(null);
 

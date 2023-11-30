@@ -1,17 +1,30 @@
 app.component('SearchBar', {
   props: ['addPinAndZoom'],
   template: `
-  <div class="form-outline" style="position:absolute; z-index: 1; top: 8%; left: 25%; width: 50%;" data-mdb-input-init>
-    <input type="search" class="form-control" v-model="searchTerm" placeholder="Search" @input="performSearch">
-    <ul>
+  <div class="form-outline" style="position:absolute; z-index: 1; top: 6%; left: 2%; width: 35%;" data-mdb-input-init>
+    <input type="search" class="form-control" v-model="searchTerm" placeholder="Search for services..." @input="performSearch">
+    <ul style="list-style:none">
       <li v-for="result in searchResults" :key="result.item.id">
-        <button type="submit" id="addBusinessButton" @click="handleClick(result.item)">
+        <button type="submit" class="btn btn-primary" id="addBusinessButton" @click="handleClick(result.item)">
           {{ result.item.name }}
         </button>
       </li>
     </ul>
+      
   </div>
   `,
+
+//   <div class="form-outline" style="position:absolute; z-index: 1; top: 6%; left: 2%; width: 35%;" data-mdb-input-init>
+//   <input type="search" class="form-control" v-model="searchTerm" placeholder="Search for services..." @input="performSearch">
+//   <ul style="list-style:none">
+//     <li v-for="result in searchResults" :key="result.item.id">
+//       <button type="submit" id="addBusinessButton" @click="handleClick(result.item)">
+//         {{ result.item.name }}
+//       </button>
+//     </li>
+//   </ul>
+    
+// </div>
   setup(props) {
     const searchTerm = ref('');
     const searchResults = ref([]);
@@ -35,18 +48,21 @@ app.component('SearchBar', {
           "lat": 41.8, 
           "long": -87.7,
           "description": "AWESOME DRY CLEANING",
-          "reviews": [
-              {
-                  "review_id": 1,
-                  "username": "Bob",
-                  "description": "Friendly staff"
-              },
-              {
-                  "review_id": 2,
-                  "username": "Jess",
-                  "description": "Fair pricing"
-              }
-          ]
+          "friendlyStaff": 12,
+          "fairPricing": 2,
+          "highProfessional": 4,
+          "flexible": 4,
+          "clean": 10
+          // "reviews": [
+          //     {
+          //         "review_id": 1,
+          //         "description": "Friendly staff",
+          //     },
+          //     {
+          //         "review_id": 2,
+          //         "description": "Fair pricing"
+          //     }
+          // ]
       },
       {
           "id": 5, 
@@ -59,7 +75,12 @@ app.component('SearchBar', {
           "thumbsUp": 6,
           "lat": 41.81, 
           "long": -87.75,
-          "description": "WOW AMAZING"
+          "description": "WOW AMAZING",
+          "friendlyStaff": 12,
+          "fairPricing": 2,
+          "highProfessional": 4,
+          "flexible": 4,
+          "clean": 10
       },
       {
           "id": 2, 
@@ -72,7 +93,12 @@ app.component('SearchBar', {
           "thumbsUp": 12,
           "lat": 41.8710589, 
           "long": -87.6782527,
-          "description": ""
+          "description": "",
+          "friendlyStaff": 12,
+          "fairPricing": 2,
+          "highProfessional": 4,
+          "flexible": 4,
+          "clean": 10
       },
       {
           "id": 3, 
@@ -85,7 +111,12 @@ app.component('SearchBar', {
           "thumbsUp": 3,
           "lat": 41.85, 
           "long": -87.69,
-          "description": ""
+          "description": "",
+          "friendlyStaff": 12,
+          "fairPricing": 2,
+          "highProfessional": 4,
+          "flexible": 4,
+          "clean": 10
       },
       {
           "id": 4, 
@@ -98,7 +129,12 @@ app.component('SearchBar', {
           "thumbsUp": 35,
           "lat": 41.89, 
           "long": -87.65,
-          "description": ""
+          "description": "",
+          "friendlyStaff": 12,
+          "fairPricing": 2,
+          "highProfessional": 4,
+          "flexible": 4,
+          "clean": 10
       }
     ]);
 

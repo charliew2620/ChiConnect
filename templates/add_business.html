@@ -22,38 +22,34 @@
     <script>
         var api_key = "[[ api_key ]]";
     </script>
-
-  <!-- <script type='text/javascript' src="[[ url_for('static', filename='index.js') ]]" defer></script>
-  <script type="text/javascript" src="[[ url_for('static', filename='map.js') ]]" defer></script>
+  <script type='text/javascript' src="[[ url_for('static', filename='addBusiness.js') ]]" defer></script>
+  <!-- <script type="text/javascript" src="[[ url_for('static', filename='map.js') ]]" defer></script>
   <script type="text/javascript" src="[[ url_for('static', filename='search.js') ]]" defer></script> -->
 </head>
 <body>
-  <div class="row" >
+  <div class="row">
     <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid">
-        <form action="/" method="post">
-            <a class="navbar-brand" href="/" type="submit">
+        <div class="container-fluid" style="height:3vh;">
+            <a class="navbar-brand" href="/">
                 ChiConnect
             </a>
-        </form>    
+        </div>
+    </nav>
+</div>
 
-        
-
-            </div>
-        </nav>
-    </div>
-
-    
+  <a href="/" class="btn btn-primary" style="margin-left: 1rem; margin-top: 1rem;">
+    <i class="bi bi-arrow-left"></i>
+  </a>
     <div class="row justify-content-center">
         <!-- <div id="searchBar" style="position:relative; z-index: 1;"></div> -->
-        <form class="col-sm-6 mx-auto">
+        <form id="business-form" class="col-sm-6 mx-auto">
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Business Name</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                <textarea class="form-control" id="businessName" rows="1" required></textarea>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Category</label>
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select class="form-control" id="businessCategory">
                   <option>Auto Repair</option>
                   <option>Hair Salon</option>
                   <option>Nail Salon</option>
@@ -63,24 +59,24 @@
               </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Address</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                <textarea class="form-control" id="businessAddress" rows="1" required></textarea>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" id="businessDescription" rows="3" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-primary" onclick="checkForm()">Submit</button>
         </form>
         <div id="app" ></div>
     </div>
 
-    <div class="row justify-content-center">
+    <!-- <div class="row justify-content-center">
         <ul class="nav justify-content-center nav-pills">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">
                 <i class="bi bi-map"></i>
                 
-                </a>
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
@@ -88,7 +84,7 @@
               </a>
             </li>
           </ul>
-    </div>
+    </div> -->
 
 
 

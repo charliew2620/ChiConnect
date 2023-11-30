@@ -3,7 +3,7 @@ app.component('Map', {
   template: `
     <div>
       <SearchBar :addPinAndZoom="addPinAndZoom" />
-      <div id="mapInner" style="position:relative; height:80vh; width:90vw;" ></div>
+      <div id="mapInner" style="position:relative; height:95vh; width:100vw;" ></div>
     </div>
   `,
   setup() {

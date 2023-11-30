@@ -23,26 +23,24 @@
         var api_key = "[[ api_key ]]";
     </script>
 
-  <!-- <script type='text/javascript' src="[[ url_for('static', filename='index.js') ]]" defer></script>
-  <script type="text/javascript" src="[[ url_for('static', filename='map.js') ]]" defer></script>
+  <script type='text/javascript' src="[[ url_for('static', filename='addBusiness.js') ]]" defer></script>
+  <!-- <script type="text/javascript" src="[[ url_for('static', filename='map.js') ]]" defer></script>
   <script type="text/javascript" src="[[ url_for('static', filename='search.js') ]]" defer></script> -->
 </head>
 <body>
-  <div class="row" >
-    <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid">
-        <form action="/" method="post">
-            <a class="navbar-brand" href="/" type="submit">
-                ChiConnect
-            </a>
-        </form>    
-
-        
-
+    <div class="row">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid" style="height:3vh;">
+                <a class="navbar-brand" href="#">
+                    ChiConnect
+                </a>
             </div>
         </nav>
     </div>
 
+    <a href="/" class="btn btn-primary" style="margin-left: 1rem; margin-top: 1rem;">
+        <i class="bi bi-arrow-left"></i>
+    </a>
     
     <div class="container mt-4">
         <div class="card">
@@ -56,47 +54,34 @@
                     <strong>Hours:</strong> Open until [[ business_info.closeTime ]] <br>
                     <strong>Address:</strong> [[ business_info.address ]] <br>
                     <strong>Phone:</strong> [[ business_info.phone ]] <br>
-                    <strong>Thumbs Up:</strong> [[ business_info.thumbsUp ]]
+                    
                 </p>
                 <p class="card-text"><strong>Description:</strong> [[ business_info.description ]]</p>
-                <a href="/" class="btn btn-primary">Go Back</a>
             </div>
         </div>
     </div>
 
-    <!-- <div class="container my-4">
+    <div class="container mt-4">
         <div class="card">
             <div class="card-header">
-                Leave a Review
+                Ratings
             </div>
             <div class="card-body">
-                <form id="reviewForm">
-                    <div class="mb-3">
-                        <label class="form-label">Your Feedback</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="reviewOption" id="thumbsUp" value="thumbsUp">
-                            <label class="form-check-label" for="thumbsUp">
-                                Thumbs Up
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="reviewOption" id="thumbsDown" value="thumbsDown">
-                            <label class="form-check-label" for="thumbsDown">
-                                Thumbs Down
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="reviewOption" id="noFeedback" value="noFeedback" checked>
-                            <label class="form-check-label" for="noFeedback">
-                                No Feedback
-                            </label>
-                        </div>
+                <h5 class="card-title">👍: <span id="thumbsUpCount">7</span></h5>
+                <p class="card-text">
+                    <!-- Add this section in the Ratings card body -->
+                    <div>
+                        <button type="button" class="btn btn-outline-dark mb-3">Friendly Staff: <span id="friendlyStaffCount">[[ business_info.friendlyStaff ]]</span></button>
+                        <button type="button" class="btn btn-outline-dark mb-3">Cleanliness: <span id="cleanlinessCount">[[ business_info.clean ]]</span></button>
+                        <button type="button" class="btn btn-outline-dark mb-3">Fair Pricing: <span id="fairPricingCount">[[ business_info.fairPricing ]]</span></button>
+                        <button type="button" class="btn btn-outline-dark mb-3">Flexible: <span id="flexibleCount">[[ business_info.flexible ]]</span></button>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Review</button>
-                </form>
+                    
+                </p>
             </div>
         </div>
-    </div> -->
+    </div>
+
     <div class="container my-4">
         <div class="card">
             <div class="card-header">
@@ -105,18 +90,35 @@
             <div class="card-body">
                 <form id="reviewForm">
                     <div class="mb-3">
-                        <label class="form-label">Your Feedback</label>
+                        <label class="form-label">Share your experience and help others!</label>
                         <div>
-                            <button type="button" class="btn btn-outline-success me-2" id="thumbsUpButton">👍 Thumbs Up</button>
-                            <button type="button" class="btn btn-outline-danger" id="thumbsDownButton">👎 Thumbs Down</button>
+                            <button type="button" class="btn btn-outline-success me-2" id="thumbsUpButton">👍</button>
+                            <button type="button" class="btn btn-outline-danger" id="thumbsDownButton">👎</button>
                         </div>
+                    </div>
+                    <!-- Add the new buttons corresponding to the ratings section -->
+                    <div>
+                        <button type="button" class="btn btn-outline-dark mb-3" id="friendlyStaffBtn">Friendly Staff</button>
+                        <button type="button" class="btn btn-outline-dark mb-3" id="cleanlinessBtn">Cleanliness</button>
+                        <button type="button" class="btn btn-outline-dark mb-3" id="fairPricingBtn">Fair Pricing</button>
+                        <button type="button" class="btn btn-outline-dark mb-3" id="flexibleBtn">Flexible</button>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit Review</button>
                 </form>
             </div>
         </div>
+        <!-- <a href="/" class="btn btn-primary">Go Back</a> -->
     </div>
+
     <script>
+        var thumbsUpCount = 7;
+        // var thumbsUpCount = Math.floor(Math.random() * 15); // Initial count, you can set it to the initial value you want
+        var friendlyStaffCount = 12;
+        var cleanlinessCount = 10;
+        var fairPricingCount = 2;
+        var flexibleCount = 4;
+
+
         document.getElementById('thumbsUpButton').addEventListener('click', function() {
             this.classList.toggle('btn-success');
             document.getElementById('thumbsDownButton').classList.remove('btn-danger');
@@ -127,14 +129,51 @@
             document.getElementById('thumbsUpButton').classList.remove('btn-success');
         });
 
+        document.getElementById('friendlyStaffBtn').addEventListener('click', function() {
+            this.classList.toggle('btn-success');
+        });
+
+        document.getElementById('cleanlinessBtn').addEventListener('click', function() {
+            this.classList.toggle('btn-success');
+        });
+
+        document.getElementById('fairPricingBtn').addEventListener('click', function() {
+            this.classList.toggle('btn-success');
+        });
+
+        document.getElementById('flexibleBtn').addEventListener('click', function() {
+            this.classList.toggle('btn-success');
+        });
+
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            var review = document.getElementById('thumbsUpButton').classList.contains('btn-success') ? 'thumbsUp' :
-                         document.getElementById('thumbsDownButton').classList.contains('btn-danger') ? 'thumbsDown' : '';
-            console.log('Review submitted:', review);
+            // Update the Thumbs Up count based on button states
+            thumbsUpCount += document.getElementById('thumbsUpButton').classList.contains('btn-success') ? 1 : 0;
+            thumbsUpCount -= document.getElementById('thumbsDownButton').classList.contains('btn-danger') ? 1 : 0;
 
+            friendlyStaffCount += document.getElementById('friendlyStaffBtn').classList.contains('btn-success') ? 1 : 0;
+            cleanlinessCount += document.getElementById('cleanlinessBtn').classList.contains('btn-success') ? 1 : 0;
+            fairPricingCount += document.getElementById('fairPricingBtn').classList.contains('btn-success') ? 1 : 0;
+            flexibleCount += document.getElementById('flexibleBtn').classList.contains('btn-success') ? 1 : 0;
+
+
+            // Display the updated count
+            document.getElementById('thumbsUpCount').innerText = thumbsUpCount < 0 ? 0 : thumbsUpCount;
+
+            document.getElementById('friendlyStaffCount').innerText = friendlyStaffCount < 0 ? 0 : friendlyStaffCount;
+            document.getElementById('cleanlinessCount').innerText = cleanlinessCount < 0 ? 0 : cleanlinessCount;
+            document.getElementById('fairPricingCount').innerText = fairPricingCount < 0 ? 0 : fairPricingCount;
+            document.getElementById('flexibleCount').innerText = flexibleCount < 0 ? 0 : flexibleCount;
+
+            var review = document.getElementById('thumbsUpButton').classList.contains('btn-success') ? 'thumbsUp' :
+                        document.getElementById('thumbsDownButton').classList.contains('btn-danger') ? 'thumbsDown' : '';
+            console.log('Review submitted:', review);
         });
+
+
     </script>
 </body>
 </html>
+
+
