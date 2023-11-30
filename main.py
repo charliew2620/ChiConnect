@@ -18,20 +18,16 @@ app.jinja_env.variable_end_string = ']]'
 
 @app.route("/business/<path:business_data>")
 def business_detail(business_data):
-    try:
+    
         # URL-decode and parse the business JSON data
-        decoded_data = unquote(business_data)  # URL-decode the string
-        business_info = json.loads(decoded_data)  # Convert JSON string to a Python dictionary
+    decoded_data = unquote(business_data)  # URL-decode the string
+    business_info = json.loads(decoded_data)  # Convert JSON string to a Python dictionary
+    print(business_info)
 
-        # Now you can access individual fields of the business object
-        business_name = business_info.get('name', 'Unknown Business')
-        # More fields can be accessed as needed
-    except json.JSONDecodeError:
-        business_name = 'Invalid Business Information'
-        # Handle other fields as necessary
+    
 
     # Pass the business information to your template
-    return render_template("business_details.html", api_key=API_KEY, business_name=business_name)
+    return render_template("business_details.html", api_key=API_KEY, business_info=business_info)
 
 
 @app.route("/add_business", methods=['POST'])

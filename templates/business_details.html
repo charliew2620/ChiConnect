@@ -44,53 +44,24 @@
     </div>
 
     
-    <div class="row justify-content-center">
-        <!-- <div id="searchBar" style="position:relative; z-index: 1;"></div> -->
-        <form class="col-sm-6 mx-auto">
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Business Name</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                Business Details
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Category</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>Auto Repair</option>
-                  <option>Hair Salon</option>
-                  <option>Nail Salon</option>
-                  <option>Cleaning Service</option>
-                  <option>Home Maintenance</option>
-                </select>
-              </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Address</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+            <div class="card-body">
+                <h5 class="card-title">[[ business_info.name ]]</h5>
+                <p class="card-text">
+                    <strong>Service:</strong> [[ business_info.service ]] <br>
+                    <strong>Hours:</strong> Open until [[ business_info.closeTime ]] <br>
+                    <strong>Address:</strong> [[ business_info.address ]] <br>
+                    <strong>Phone:</strong> [[ business_info.phone ]] <br>
+                    <strong>Thumbs Up:</strong> [[ business_info.thumbsUp ]]
+                </p>
+                <p class="card-text"><strong>Description:</strong> [[ business_info.description ]]</p>
+                <a href="/" class="btn btn-primary">Go Back</a>
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <div id="app" ></div>
+        </div>
     </div>
-
-    <div class="row justify-content-center">
-        <ul class="nav justify-content-center nav-pills">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-                <i class="bi bi-map"></i>
-                
-                </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="bi bi-plus-circle"></i>
-              </a>
-            </li>
-          </ul>
-    </div>
-
-
-
 </body>
 </html>
