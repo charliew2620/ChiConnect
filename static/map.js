@@ -84,7 +84,7 @@ app.component('Map', {
         roundClickableArea: true,
         enableClickedStyle: true,
         cursor: 'pointer',
-        color: business.thumbsUp < 10 ? 'green' : null,
+        color: business.totalRatings < 20 ? 'green' : null,
 
       };
     
