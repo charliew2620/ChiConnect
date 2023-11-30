@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect
 import os
+import json
+from urllib.parse import unquote
 from azure.cosmos import CosmosClient, PartitionKey, exceptions
 
 API_KEY = os.environ.get('API_KEY')
@@ -14,15 +16,25 @@ db_client = CosmosClient(url=ENDPOINT, credential=KEY)
 app.jinja_env.variable_start_string = '[['
 app.jinja_env.variable_end_string = ']]'
 
+@app.route("/business/<path:business_data>")
+def business_detail(business_data):
+    
+        # URL-decode and parse the business JSON data
+    decoded_data = unquote(business_data)  # URL-decode the string
+    business_info = json.loads(decoded_data)  # Convert JSON string to a Python dictionary
+    print(business_info)
 
-# @app.route("/search", methods=['GET'])
-# def search():
-#     query = request.args.get('query')
-#     print(f'user searched for: {query}')
-#     return render_template("search.html", api_key=API_KEY, query=query)
+    
 
-# @app.route("/search/<input>", methods=['GET'])
-# def search
+    # Pass the business information to your template
+    return render_template("business_details.html", api_key=API_KEY, business_info=business_info)
+
+
+@app.route("/add_business", methods=['POST'])
+def add_business():
+    # query = request.args.get('query')
+    # print(f'user searched for: {query}')
+    return render_template("add_business.html", api_key=API_KEY)
 
 @app.route("/", methods=['GET', 'POST'])
 def home_page():

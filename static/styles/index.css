@@ -83,3 +83,11 @@ button:hover {
     height: auto; /* you can set a specific height if you want */
     width: auto; /* you can set a specific width if you want */
   }
+
+
+  .location-button {
+    margin-left: 10px; /* Horizontal spacing between the buttons */
+    background-color: #4CAF50; /* New color for the location button */
+    color: white; /* Text color for the location button */
+    /* Additional styling can be added here */
+  }
