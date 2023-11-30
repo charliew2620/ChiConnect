@@ -1,17 +1,20 @@
 app.component('SearchBar', {
   props: ['addPinAndZoom'],
   template: `
-  <div class="form-outline" style="position:absolute; z-index: 1; top: 9%; left: 5%; width: 75%;" data-mdb-input-init>
-    <input type="search" class="form-control" v-model="searchTerm" placeholder="Search for services..." @input="performSearch">
-    <ul style="list-style:none">
-      <li v-for="result in searchResults" :key="result.item.id">
-        <button type="submit" class="btn btn-primary" id="addBusinessButton" @click="handleClick(result.item)">
-          {{ result.item.name }}
-        </button>
-      </li>
-    </ul>
-      
-  </div>
+  <div class="form-outline" style="position:absolute; z-index: 1; top: 6%; left: 2%; width: 35%;" data-mdb-input-init>
+  <input type="search" class="form-control" v-model="searchTerm" placeholder="Search for services..." @input="performSearch">
+  <ul style="list-style:none; padding: 0;">
+    <li v-for="result in searchResults" :key="result.item.id" style="margin-bottom: 10px; display: flex; align-items: center;">
+      <button type="submit" class="btn btn-primary business-button" @click="sendToBusiness(result.item)" style="margin-right: 10px;">
+        {{ result.item.name }}
+      </button>
+      <button type="submit" class="btn location-button" @click="handleClick(result.item)" style="background-color: #4CAF50; color: white;">
+        📍
+      </button>
+    </li>
+  </ul>
+</div>
+
   `,
 
 //   <div class="form-outline" style="position:absolute; z-index: 1; top: 6%; left: 2%; width: 35%;" data-mdb-input-init>
@@ -151,6 +154,10 @@ app.component('SearchBar', {
       console.log("searchResult", fuse.search(searchTerm.value))
     };
 
+    const sendToBusiness = (business) => {
+      window.location.href = `/business/${encodeURIComponent(JSON.stringify(business))}`;
+    }
+
     const handleClick = (business) => {
       console.log("Clicked on:", business.name);
       if (props.addPinAndZoom) {
@@ -167,6 +174,7 @@ app.component('SearchBar', {
       searchResults,
       performSearch,
       handleClick,
+      sendToBusiness,
     };
   },
 });
