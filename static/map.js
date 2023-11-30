@@ -60,11 +60,34 @@ app.component('Map', {
       });
     };
 
+    function createScaledPushpin(location, imgUrl, scale, callback) {
+      var img = new Image();
+      img.onload = function () {
+        var c = document.createElement('canvas');
+        c.width = img.width * scale;
+        c.height = img.height * scale;
+
+        var context = c.getContext('2d');
+        context.drawImage(img, 0, 0, c.width, c.height);
+
+        var pin = new Microsoft.Maps.Pushpin(location, {
+          icon: c.toDataURL(),
+          anchor: new Microsoft.Maps.Point(c.width / 2, c.height / 2)
+        });
+
+        if (callback) {
+          callback(pin);
+        }
+      };
+      img.src = imgUrl;
+    }
+
     const addPinAndZoom = (business) => {
       if (!mapInstance.value) return;
-
+    
       const location = new Microsoft.Maps.Location(business.lat, business.long);
-
+    
+      // Check for existing pin at this location
       let existingPin = null;
       for (let i = 0; i < mapInstance.value.entities.getLength(); i++) {
         let pin = mapInstance.value.entities.get(i);
@@ -74,48 +97,39 @@ app.component('Map', {
           break;
         }
       }
-      
-      const basePinSize = 24;
-      const scalingFactor = 0.5; 
-
-      let pinSize = basePinSize + (business.thumbsUp * scalingFactor);
-
-      let pinOptions = {
-        roundClickableArea: true,
-        enableClickedStyle: true,
-        cursor: 'pointer',
-        color: business.totalRatings < 20 ? 'green' : null,
-
-      };
     
-      // If there is no existing pin, add a title
-      if (!existingPin) {
-        pinOptions.title = business.name; // Set the title for new pins
+      const smallSize = 10; 
+      const mediumSize = 14; 
+      const largeSize = 18; 
+    
+      let pinSize;
+      if (business.totalRatings > 20) {
+          pinSize = smallSize;
+      } else if (business.thumbsUp > 10) {
+          pinSize = mediumSize;
+      } else {
+          pinSize = largeSize;
       }
+
+      const pinImageUrl = business.totalRatings > 20 ? 'static/Map-Marker-Marker-Outside-Azure-icon.png' : 'static/Map-Marker-Marker-Outside-Pink-icon.png';
+      const scale = pinSize / 24;
     
-      const pin = new Microsoft.Maps.Pushpin(location, pinOptions);
-
-      
-      mapInstance.value.setView({ center: location, zoom: 16 });
-
-      // const pin = new Microsoft.Maps.Pushpin(location, {
-      //   title: business.name,
-      //   roundClickableArea: true,
-      //   enableClickedStyle: true,
-      //   cursor: 'pointer'
-      //   });
-
-      Microsoft.Maps.Events.addHandler(pin, 'click', () => {
-        window.location.href = `/business/${encodeURIComponent(JSON.stringify(business))}`;
+      createScaledPushpin(location, pinImageUrl, scale, (pin) => {
+        // Set the title for new pins only
+        if (!existingPin) {
+          pin.setOptions({ title: business.name });
+        }
+    
+        mapInstance.value.entities.push(pin);
+        mapInstance.value.setView({ center: location, zoom: 16 });
+    
+        Microsoft.Maps.Events.addHandler(pin, 'click', () => {
+          window.location.href = `/business/${encodeURIComponent(JSON.stringify(business))}`;
+        });
       });
-
-      
-      mapInstance.value.entities.push(pin);
-    
-
-      mapInstance.value.setView({ center: location, zoom: 16 }); // Adjust zoom level as needed
     };
     
+
 
     return {
       mapInstance,

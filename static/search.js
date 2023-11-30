@@ -74,7 +74,7 @@ app.component('SearchBar', {
           "address": "200 S Wacker St, Chicago, IL 60608",
           "phone": "908-656-1234",
           "thumbsUp": 6,
-          "totalRatings": 20,
+          "totalRatings": 19,
           "lat": 41.81, 
           "long": -87.75,
           "description": "WOW AMAZING",
