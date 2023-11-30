@@ -62,13 +62,19 @@ app.component('Map', {
 
     const addPinAndZoom = (business) => {
       if (!mapInstance.value) return;
-    
-      const location = new Microsoft.Maps.Location(business.lat, business.long);
-      const pin = new Microsoft.Maps.Pushpin(location,
-        {
 
-          title: business.name,
+      const location = new Microsoft.Maps.Location(business.lat, business.long);
+      const pin = new Microsoft.Maps.Pushpin(location, {
+        title: business.name,
+        roundClickableArea: true,
+        enableClickedStyle: true,
+        cursor: 'pointer'
         });
+
+      Microsoft.Maps.Events.addHandler(pin, 'click', () => {
+        window.location.href = `/business/${encodeURIComponent(JSON.stringify(business))}`;
+      });
+
       mapInstance.value.entities.push(pin);
       mapInstance.value.setView({ center: location, zoom: 16 }); // Adjust zoom level as needed
     };

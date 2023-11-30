@@ -22,49 +22,83 @@ app.component('SearchBar', {
     });
 
     const data = ref([
-      // { id: 1, name: 'Apple' },
-      // { id: 2, name: 'Banana' },
-      // { id: 3, name: 'Orange' },
       {
-        "id": 1, 
-        "name": "Murali Dry Cleaners", 
-        "lat": 41.8, 
-        "long": -87.7,
-        "description": "AWESOME DRY CLEANING",
-        "reviews": [
-          {
-              "review_id": 1,
-              "description": "HI"
-          }
-        ]
+          "id": 1, 
+          "name": "Murali Dry Cleaners", 
+          "service": "Dry Cleaning",
+          "open": "Open",
+          "closeTime": "6pm",
+          "address": "1750 W 18th St, Chicago, IL 60608",
+          "phone": "908-666-1234",
+          "images": "https://pbs.twimg.com/ext_tw_video_thumb/1446431430926643200/pu/img/WL1YOdxXMvdREoZi.jpg",
+          "thumbsUp": 10,
+          "lat": 41.8, 
+          "long": -87.7,
+          "description": "AWESOME DRY CLEANING",
+          "reviews": [
+              {
+                  "review_id": 1,
+                  "username": "Bob",
+                  "description": "Friendly staff"
+              },
+              {
+                  "review_id": 2,
+                  "username": "Jess",
+                  "description": "Fair pricing"
+              }
+          ]
       },
       {
-        "id": 1, 
-        "name": "Murali Laundromat", 
-        "lat": 41.8, 
-        "long": -87.7,
-        "description": "WOW AMAZING"
+          "id": 5, 
+          "name": "Murali Laundromat", 
+          "service": "Laundromat",
+          "open": "Open",
+          "closeTime": "9pm",
+          "address": "200 S Wacker St, Chicago, IL 60608",
+          "phone": "908-656-1234",
+          "thumbsUp": 6,
+          "lat": 41.81, 
+          "long": -87.75,
+          "description": "WOW AMAZING"
       },
       {
-        "id": 2, 
-        "name": "Nanda Auto Repair Service", 
-        "lat": 41.8710589, 
-        "long": -87.6782527,
-        "description": ""
+          "id": 2, 
+          "name": "Nanda Auto Repair Service", 
+          "service": "Auto Repair",
+          "open": "Open",
+          "closeTime": "6:30pm",
+          "address": "600 N. Green St, Chicago, IL 60608",
+          "phone": "847-666-1234",
+          "thumbsUp": 12,
+          "lat": 41.8710589, 
+          "long": -87.6782527,
+          "description": ""
       },
       {
-        "id": 3, 
-        "name": "Ho's Hair Salon", 
-        "lat": 41.85, 
-        "long": -87.69,
-        "description": ""
+          "id": 3, 
+          "name": "Ho's Hair Salon", 
+          "service": "Hair Salon",
+          "open": "Open",
+          "closeTime": "7:30pm",
+          "address": "809 S. Damen St, Chicago, IL 60608",
+          "phone": "123-444-6666",
+          "thumbsUp": 3,
+          "lat": 41.85, 
+          "long": -87.69,
+          "description": ""
       },
       {
-        "id": 4, 
-        "name": "Foobar",  
-        "lat": 41.89, 
-        "long": -87.65,
-        "description": ""
+          "id": 4, 
+          "name": "Wang's Cakes",  
+          "service": "Bakery",
+          "open": "Open",
+          "closeTime": "4pm",
+          "address": "1145 W. Taylor St, Chicago, IL 60608",
+          "phone": "6366759695",
+          "thumbsUp": 35,
+          "lat": 41.89, 
+          "long": -87.65,
+          "description": ""
       }
     ]);
 
