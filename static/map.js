@@ -111,7 +111,7 @@ app.component('Map', {
           pinSize = largeSize;
       }
 
-      const pinImageUrl = business.totalRatings > 20 ? 'static/Map-Marker-Marker-Outside-Azure-icon.png' : 'static/Map-Marker-Marker-Outside-Pink-icon.png';
+      const pinImageUrl = business.totalRatings > 20 ? 'static/Map-Marker-Ball-Azure-icon.png' : 'static/Map-Marker-Ball-Pink-icon.png';
       const scale = pinSize / 24;
     
       createScaledPushpin(location, pinImageUrl, scale, (pin) => {

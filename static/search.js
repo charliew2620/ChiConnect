@@ -8,7 +8,7 @@ app.component('SearchBar', {
       <button type="submit" class="btn btn-primary business-button" @click="sendToBusiness(result.item)" style="margin-right: 10px;">
         {{ result.item.name }}
       </button>
-      <button type="submit" class="btn location-button" @click="handleClick(result.item)" style="background-color: #4CAF50; color: white;">
+      <button type="submit" class="btn location-button" @click="handleClick(result.item)" style="background-color: #007bff; color: white;">
         📍
       </button>
     </li>
