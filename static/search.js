@@ -1,7 +1,7 @@
 app.component('SearchBar', {
   props: ['addPinAndZoom'],
   template: `
-  <div class="form-outline" style="position:absolute; z-index: 1; top: 6%; left: 2%; width: 35%;" data-mdb-input-init>
+  <div class="form-outline" style="position:absolute; z-index: 1; top: 9%; left: 5%; width: 75%;" data-mdb-input-init>
     <input type="search" class="form-control" v-model="searchTerm" placeholder="Search for services..." @input="performSearch">
     <ul style="list-style:none">
       <li v-for="result in searchResults" :key="result.item.id">
@@ -77,7 +77,7 @@ app.component('SearchBar', {
           "totalRatings": 19,
           "lat": 41.81, 
           "long": -87.75,
-          "description": "WOW AMAZING",
+          "description": "Discover convenience and cleanliness at its finest with Murali Laundromat! Our modern facility is equipped with the latest washing and drying technology to ensure a thorough clean for your garments. Choose from a variety of machine sizes for any load, and enjoy a bright, welcoming atmosphere. Our user-friendly machines, easy payment options, and attentive staff make laundry day a breeze. Murali Laundromat – where efficiency meets excellence!",
           "friendlyStaff": 12,
           "fairPricing": 2,
           "highProfessional": 4,

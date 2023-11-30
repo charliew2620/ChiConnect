@@ -2,9 +2,9 @@ const { createApp, ref, onMounted } = Vue;
 const app = createApp({
   template: `
   <div>
-      <div style="position:absolute; z-index: 1; top: 6%; left: 39%; width: 20%;" data-mdb-input-init>  
+      <div style="position:absolute; z-index: 1; bottom: 5%; left: 5%; width: 20%;" data-mdb-input-init>  
         <form action="/add_business" method="post">
-        <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Add Business">
+        <button type="submit" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="bottom" title="Add Business">
           <i class="bi bi-plus-circle"></i>
         </button>
         </form>    
