@@ -8,7 +8,7 @@ function checkForm() {
   if (businessName.trim() === '' || businessAddress.trim() === '' || businessDescription.trim() === '') {
     alert("Please fill in all required fields.");
   } else if (form.checkValidity()) {
-    alert("Successfully submitted " + businessName + "for review!");
+    alert("Successfully submitted " + businessName + " for review!");
     document.getElementById("businessName").value = '';
     document.getElementById("businessAddress").value = '';
     document.getElementById("businessDescription").value = '';
