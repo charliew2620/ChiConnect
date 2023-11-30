@@ -74,11 +74,18 @@ app.component('Map', {
           break;
         }
       }
-    
+      
+      const basePinSize = 24;
+      const scalingFactor = 0.5; 
+
+      let pinSize = basePinSize + (business.thumbsUp * scalingFactor);
+
       let pinOptions = {
         roundClickableArea: true,
         enableClickedStyle: true,
-        cursor: 'pointer'
+        cursor: 'pointer',
+        color: business.thumbsUp < 10 ? 'green' : null,
+
       };
     
       // If there is no existing pin, add a title
